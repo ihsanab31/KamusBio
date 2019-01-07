@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activities.user.UserNameActivity">
+
+    <include layout="@layout/header_app" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen10dp">
+
+        <ImageView
+            android:layout_width="@dimen/dimen150dp"
+            android:layout_height="@dimen/dimen150dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/biologi" />
+
+        <com.libizo.CustomEditText
+            android:id="@+id/et_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/dimen6"
+            android:hint="@string/nama_input"
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            app:libIZO_clearIconTint="@color/hint"
+            app:libIZO_setBorderColor="@color/colorPrimary"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setClearIconVisible="true"
+            app:libIZO_setCornerRadius="3dp"
+            app:libIZO_setStrokeWidth="1dp" />
+
+        <com.libizo.CustomEditText
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/dimen6"
+            android:hint="@string/masukkan_no_hp"
+            android:inputType="number"
+            android:padding="10dp"
+            app:libIZO_clearIconTint="@color/hint"
+            app:libIZO_setBorderColor="@color/colorPrimary"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setClearIconVisible="true"
+            app:libIZO_setCornerRadius="3dp"
+            app:libIZO_setPrefix="+62"
+            app:libIZO_setPrefixTextColor="@color/colorAccent"
+            app:libIZO_setStrokeWidth="1dp" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_button"
+            android:layout_marginTop="@dimen/dimen5dp"
+            android:layout_height="wrap_content"
+            android:text="@string/submit" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">KamusBio</string>
+    <string name="nama_input">Masukkan Nama Anda</string>
+    <string name="masukkan_no_hp">Masukkan No. Hp</string>
+    <string name="title_header_app">Masukkan Data Diri</string>
+    <string name="todo">TODO</string>
+    <string name="submit">Submit</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="kamus_biologi_indonesia">Kamus Biologi Indonesia</string>
+    <string name="kamus_biologi_latin">Kamus Biologi Latin</string>
+    <string name="exit">Keluar Aplikasi</string>
+    <string name="input_text_disini">Input Text Disini</string>
+    <string name="default_acara">Nama : Harimau</string>
+    <string name="default_tanggal">Latin : Panthera tigris</string>
+    <string name="alamat">Deskripsi</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="speech_prompt">Say something&#8230;</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="tap_on_mic">Tap on mic to speak</string>
+</resources>
