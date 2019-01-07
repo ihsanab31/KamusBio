@@ -11,4 +11,6 @@ package com.sundevs.ihsan.kamusbio.utils;
  */
 public class Constant {
     public static final String IMAGE_URL="https://projectmantaps.000webhostapp.com/";
+    public static final String BASE_URL_API = "https://projectmantaps.000webhostapp.com/";
+
 }

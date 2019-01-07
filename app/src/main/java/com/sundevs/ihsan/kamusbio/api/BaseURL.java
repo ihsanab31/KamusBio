@@ -1,5 +1,7 @@
 package com.sundevs.ihsan.kamusbio.api;
 
+import com.sundevs.ihsan.kamusbio.utils.Constant;
+
 /**
  * Created by
  * Name     : Ihsan Abdurahman
@@ -11,9 +13,7 @@ package com.sundevs.ihsan.kamusbio.api;
  */
 public class BaseURL {
 
-    private static final String BASE_URL_API = "https://projectmantaps.000webhostapp.com/";
-
     public static EndPoint getAPIService() {
-        return ApiClient.getClient(BASE_URL_API).create(EndPoint.class);
+        return ApiClient.getClient(Constant.BASE_URL_API).create(EndPoint.class);
     }
 }
