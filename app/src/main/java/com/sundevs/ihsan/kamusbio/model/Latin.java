@@ -24,45 +24,6 @@ public class Latin {
 	@SerializedName("nama_indo")
 	private String namaIndo;
 
-	public void setDeskripsiLatin(String deskripsiLatin){
-		this.deskripsiLatin = deskripsiLatin;
-	}
-
-	public String getDeskripsiLatin(){
-		return deskripsiLatin;
-	}
-
-	public void setFoto(String foto){
-		this.foto = foto;
-	}
-
-	public String getFoto(){
-		return foto;
-	}
-
-	public void setIdLatin(String idLatin){
-		this.idLatin = idLatin;
-	}
-
-	public String getIdLatin(){
-		return idLatin;
-	}
-
-	public void setNamaLatin(String namaLatin){
-		this.namaLatin = namaLatin;
-	}
-
-	public String getNamaLatin(){
-		return namaLatin;
-	}
-
-	public void setNamaIndo(String namaIndo){
-		this.namaIndo = namaIndo;
-	}
-
-	public String getNamaIndo(){
-		return namaIndo;
-	}
 
 	@Override
  	public String toString(){

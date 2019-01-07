@@ -7,7 +7,6 @@ import com.sundevs.ihsan.kamusbio.model.Latin;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 public class LatinResponse{
@@ -24,14 +23,6 @@ public class LatinResponse{
 
 	public List<Latin> getData(){
 		return data;
-	}
-
-	public void setStatus(boolean status){
-		this.status = status;
-	}
-
-	public boolean isStatus(){
-		return status;
 	}
 
 	@Override

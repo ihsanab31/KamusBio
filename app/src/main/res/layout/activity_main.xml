@@ -14,10 +14,14 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/dimen10dp">
-
+        <ImageView
+            android:layout_width="@dimen/dimen200dp"
+            android:layout_height="@dimen/dimen200dp"
+            android:src="@drawable/biologi"/>
         <Button
             android:id="@+id/btn_kmsindo"
             android:layout_width="@dimen/dimen250dp"
+            android:layout_marginTop="@dimen/dimen16"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_button"
             android:textColor="@color/white"

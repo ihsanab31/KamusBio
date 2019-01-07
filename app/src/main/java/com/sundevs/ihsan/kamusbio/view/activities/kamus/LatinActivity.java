@@ -103,7 +103,6 @@ public class LatinActivity extends NormalActivity {
 
     private void initSearch(){
         etSearch.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
 
             }
