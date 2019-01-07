@@ -2,7 +2,6 @@ package com.sundevs.ihsan.kamusbio.view.base;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;

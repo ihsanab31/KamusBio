@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -60,7 +61,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.google.firebase:firebase-perf:16.2.2'
+    implementation 'com.google.firebase:firebase-perf:16.2.3'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'com.libizo:customedittext:1.0.4'
     //noinspection GradleDependency

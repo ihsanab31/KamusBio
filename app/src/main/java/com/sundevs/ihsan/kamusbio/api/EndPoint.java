@@ -3,6 +3,7 @@ package com.sundevs.ihsan.kamusbio.api;
 
 
 import com.sundevs.ihsan.kamusbio.model.response.KamusResponse;
+import com.sundevs.ihsan.kamusbio.model.response.LatinResponse;
 import com.sundevs.ihsan.kamusbio.model.response.UserResponse;
 
 import retrofit2.Call;
@@ -34,5 +35,6 @@ public interface EndPoint {
 
     );
 
-
+    @GET("load_latin.php")
+    Call<LatinResponse> getLatin();
 }

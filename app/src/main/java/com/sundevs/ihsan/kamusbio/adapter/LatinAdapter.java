@@ -44,7 +44,7 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public LatinAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null, false);
         RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         v.setLayoutParams(layoutParams);

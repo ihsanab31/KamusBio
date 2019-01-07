@@ -23,7 +23,6 @@ import com.sundevs.ihsan.kamusbio.view.base.NormalActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
