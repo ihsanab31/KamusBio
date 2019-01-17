@@ -54,8 +54,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".view.activities.kamus.IndonesiaActivity" />
-        <activity android:name=".view.activities.kamus.LatinActivity"></activity>
+        <activity android:name=".view.activities.kamus.indo.IndonesiaActivity" />
+        <activity android:name=".view.activities.kamus.latin.LatinActivity"></activity>
     </application>
 
 </manifest>

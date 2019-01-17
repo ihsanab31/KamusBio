@@ -1,7 +1,5 @@
 package com.sundevs.ihsan.kamusbio.view.base;
 
-import java.util.List;
-
 /**
  * Created by
  * Name     : Ihsan Abdurahman
@@ -11,6 +9,14 @@ import java.util.List;
  * ------------------------------
  * This class for
  */
-public interface BaseView<M> {
-     void onLoad(List<M> data);
+public class BasePresnter<V> {
+    public V mView;
+
+    public void attach(V view) {
+        mView = view;
+    }
+
+    public void detach() {
+        mView = null;
+    }
 }

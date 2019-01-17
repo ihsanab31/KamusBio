@@ -1,10 +1,9 @@
-package com.sundevs.ihsan.kamusbio.view.activities.kamus;
+package com.sundevs.ihsan.kamusbio.view.activities.kamus.indo;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -14,44 +13,42 @@ import android.widget.Toast;
 
 import com.libizo.CustomEditText;
 import com.sundevs.ihsan.kamusbio.R;
-import com.sundevs.ihsan.kamusbio.adapter.LatinAdapter;
+import com.sundevs.ihsan.kamusbio.adapter.IndonesiaAdapter;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
-import com.sundevs.ihsan.kamusbio.model.Latin;
-import com.sundevs.ihsan.kamusbio.model.response.LatinResponse;
-import com.sundevs.ihsan.kamusbio.view.base.NormalActivity;
+import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.view.base.BaseActivityList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class LatinActivity extends NormalActivity {
+public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> implements IndonesiaView {
     EndPoint apiSevice;
-    List<Latin> kamusList = new ArrayList<>();
-    private final int REQ_CODE_SPEECH_INPUT = 100;
-    LatinAdapter latinAdapter;
+    List<Kamus> kamusList = new ArrayList<>();
     @BindView(R.id.et_search)
     CustomEditText etSearch;
-    @BindView(R.id.rv_latin)
-    RecyclerView rvLatin;
+    @BindView(R.id.rv_indo)
+    RecyclerView rvIndo;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+    IndonesiaAdapter indonesiaAdapter;
 
     @Override
     protected int getActivityView() {
-        return R.layout.activity_latin;
+        return R.layout.activity_indonesia;
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        apiSevice =BaseURL.getAPIService();
+        apiSevice = BaseURL.getAPIService();
         initView();
-        getData();
         initSearch();
+        mPresenter.getIndonesia(this);
     }
 
     @Override
@@ -70,41 +67,18 @@ public class LatinActivity extends NormalActivity {
                 break;
         }
     }
-    private void initView(){
-        latinAdapter = new LatinAdapter(this, kamusList);
-        rvLatin.setHasFixedSize(true);
-        rvLatin.setLayoutManager(new LinearLayoutManager(this));
-        rvLatin.setAdapter(latinAdapter);
+
+    private void initView() {
+        indonesiaAdapter = new IndonesiaAdapter(this, kamusList);
+        rvIndo.setHasFixedSize(true);
+        rvIndo.setLayoutManager(new LinearLayoutManager(this));
+        rvIndo.setAdapter(indonesiaAdapter);
     }
 
-    private void getData(){
-        showProgressDialog("Please Wait");
-        apiSevice.getLatin().enqueue(new Callback<LatinResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<LatinResponse> call, @NonNull Response<LatinResponse> response) {
-                if (response.body().isStatus()){
-                    dissmisProgressDialog();
-                    kamusList= response.body().getData();
-                    rvLatin.setAdapter(new LatinAdapter(getApplicationContext(), kamusList));
-                    latinAdapter.notifyDataSetChanged();
-                }else {
-                    dissmisProgressDialog();
-                    showMessage("Error Response");
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<LatinResponse> call, @NonNull Throwable t) {
-                dissmisProgressDialog();
-                showMessage(t.getMessage());
-            }
-        });
-    }
-
-    private void initSearch(){
+    private void initSearch() {
         etSearch.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,27 +86,31 @@ public class LatinActivity extends NormalActivity {
             }
 
             public void onTextChanged(CharSequence query, int start, int before, int count) {
+
                 query = query.toString().toLowerCase();
-                final List<Latin> filteredList = new ArrayList<>();
+
+                final List<Kamus> filteredList = new ArrayList<>();
+
                 for (int i = 0; i < kamusList.size(); i++) {
-                    final String bidang = kamusList.get(i).getNamaLatin().toLowerCase();
+
+                    final String bidang = kamusList.get(i).getNamaKamus().toLowerCase();
                     if (bidang.contains(query)) {
                         filteredList.add(kamusList.get(i));
                     }
                 }
 
-                rvLatin.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                latinAdapter= new LatinAdapter(getApplicationContext(), filteredList);
-                rvLatin.setAdapter(latinAdapter);
-                latinAdapter.notifyDataSetChanged();  // data set changed
+                rvIndo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                indonesiaAdapter = new IndonesiaAdapter(getApplicationContext(), filteredList);
+                rvIndo.setAdapter(indonesiaAdapter);
+                indonesiaAdapter.notifyDataSetChanged();  // data set changed
             }
         });
     }
 
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "id-ID");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id-ID");
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt));
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
@@ -142,6 +120,7 @@ public class LatinActivity extends NormalActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -158,5 +137,15 @@ public class LatinActivity extends NormalActivity {
             }
 
         }
+    }
+
+    @Override
+    public void onLoad(List<Kamus> data) {
+        indonesiaAdapter.refresh(data);
+    }
+
+    @Override
+    public IndonesiaPresenter initPresenter() {
+        return new IndonesiaPresenter(this);
     }
 }

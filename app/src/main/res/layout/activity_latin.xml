@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.activities.kamus.LatinActivity">
+    tools:context=".view.activities.kamus.latin.LatinActivity">
 
     <include layout="@layout/header_search" />
 

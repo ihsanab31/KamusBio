@@ -7,7 +7,7 @@ import com.google.firebase.perf.metrics.AddTrace;
 import com.google.firebase.perf.metrics.Trace;
 import com.libizo.CustomEditText;
 import com.sundevs.ihsan.kamusbio.R;
-import com.sundevs.ihsan.kamusbio.view.base.NormalActivity;
+import com.sundevs.ihsan.kamusbio.utils.NormalActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

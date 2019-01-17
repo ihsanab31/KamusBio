@@ -9,7 +9,7 @@ import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.utils.preference.SessionManager;
 import com.sundevs.ihsan.kamusbio.view.activities.menu.MainActivity;
 import com.sundevs.ihsan.kamusbio.view.activities.user.UserNameActivity;
-import com.sundevs.ihsan.kamusbio.view.base.NormalActivity;
+import com.sundevs.ihsan.kamusbio.utils.NormalActivity;
 
 public class SplashScreenActivity extends NormalActivity {
     SessionManager sessionManager;

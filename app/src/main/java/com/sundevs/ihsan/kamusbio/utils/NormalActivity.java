@@ -1,7 +1,9 @@
-package com.sundevs.ihsan.kamusbio.view.base;
+package com.sundevs.ihsan.kamusbio.utils;
 
 
 import android.support.v7.app.ActionBar;
+
+import com.sundevs.ihsan.kamusbio.view.base.BaseActivity;
 
 /**
  * Created by

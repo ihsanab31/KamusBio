@@ -17,6 +17,7 @@ import com.sundevs.ihsan.kamusbio.adapter.listener.ItemClickListener;
 import com.sundevs.ihsan.kamusbio.model.Kamus;
 import com.sundevs.ihsan.kamusbio.utils.Constant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,13 +51,10 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
         return new ViewHolder(v);
     }
 
-
-
     @Override
     public int getItemCount() {
         return kamusList.size();
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
@@ -69,7 +67,12 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
             }
         });
 
+    }
 
+    public void refresh(List<Kamus> fill) {
+        kamusList = new ArrayList<>();
+        kamusList.addAll(fill);
+        notifyDataSetChanged();
     }
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ItemClickListener itemClickListener;

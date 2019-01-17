@@ -9,6 +9,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -34,20 +35,21 @@ import permissions.dispatcher.RuntimePermissions;
  * Name     : Ihsan Abdurahman
  * Email    : ihsanab31@gmail.com
  * WA       : 0878253827096
- * on Sunday, 19-11-2017
+ * Tanggal  : 16/01/2019
  * ------------------------------
- * This class for view activity
+ * This class for
  */
-
 @RuntimePermissions
-public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+public abstract class BaseActivityList<PT extends BasePresnter> extends AppCompatActivity implements BaseView {
 
-    public static final String TAG = BaseActivity.class.getSimpleName();
+    public PT mPresenter;
     private ProgressDialog progressDialog;
     private boolean isPaused;
 
     @LayoutRes
     protected abstract int getActivityView();
+
+    public abstract PT initPresenter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,8 +57,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         setContentView(getActivityView());
         ButterKnife.bind(this);
         onBindView();
-        BaseActivityPermissionsDispatcher.needPermisonWithPermissionCheck(this);
-
+        BaseActivityListPermissionsDispatcher.needPermisonWithPermissionCheck(this);
+        mPresenter = initPresenter();
     }
 
     protected void startService() {
@@ -157,9 +159,30 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        initActionBar();
+        if (mPresenter != null) {
+            mPresenter.detach();
+        }
+    }
+
+    protected abstract boolean isActionBarEnable();
+
+
+
+    private void initActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            if (!isActionBarEnable()) {
+                actionBar.hide();
+            }
+        }
+    }
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        BaseActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        BaseActivityListPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
     @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
@@ -170,13 +193,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     void showDeniedNeedPermiison() {
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         dialog.setMessage("You must allow permission to use this app");
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+        dialog.setOnDismissListener(new android.content.DialogInterface.OnDismissListener() {
             @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                BaseActivity.this.finishAffinity();
+            public void onDismiss(android.content.DialogInterface dialogInterface) {
+                BaseActivityList.this.finishAffinity();
             }
         });
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+        dialog.setButton(android.content.DialogInterface.BUTTON_POSITIVE, "OK", new android.content.DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

@@ -1,4 +1,4 @@
-package com.sundevs.ihsan.kamusbio.view.activities.kamus;
+package com.sundevs.ihsan.kamusbio.view.activities.kamus.latin;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -14,12 +14,12 @@ import android.widget.Toast;
 
 import com.libizo.CustomEditText;
 import com.sundevs.ihsan.kamusbio.R;
-import com.sundevs.ihsan.kamusbio.adapter.IndonesiaAdapter;
+import com.sundevs.ihsan.kamusbio.adapter.LatinAdapter;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
-import com.sundevs.ihsan.kamusbio.model.Kamus;
-import com.sundevs.ihsan.kamusbio.model.response.KamusResponse;
-import com.sundevs.ihsan.kamusbio.view.base.NormalActivity;
+import com.sundevs.ihsan.kamusbio.model.Latin;
+import com.sundevs.ihsan.kamusbio.model.response.LatinResponse;
+import com.sundevs.ihsan.kamusbio.utils.NormalActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +30,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class IndonesiaActivity extends NormalActivity {
+public class LatinActivity extends NormalActivity {
     EndPoint apiSevice;
-    List<Kamus> kamusList = new ArrayList<>();
+    List<Latin> kamusList = new ArrayList<>();
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+    LatinAdapter latinAdapter;
     @BindView(R.id.et_search)
     CustomEditText etSearch;
-    @BindView(R.id.rv_indo)
-    RecyclerView rvIndo;
-    private final int REQ_CODE_SPEECH_INPUT = 100;
-    IndonesiaAdapter indonesiaAdapter;
+    @BindView(R.id.rv_latin)
+    RecyclerView rvLatin;
+
     @Override
     protected int getActivityView() {
-        return R.layout.activity_indonesia;
+        return R.layout.activity_latin;
     }
 
     @Override
@@ -69,24 +70,23 @@ public class IndonesiaActivity extends NormalActivity {
                 break;
         }
     }
-
     private void initView(){
-        indonesiaAdapter = new IndonesiaAdapter(this, kamusList);
-        rvIndo.setHasFixedSize(true);
-        rvIndo.setLayoutManager(new LinearLayoutManager(this));
-        rvIndo.setAdapter(indonesiaAdapter);
+        latinAdapter = new LatinAdapter(this, kamusList);
+        rvLatin.setHasFixedSize(true);
+        rvLatin.setLayoutManager(new LinearLayoutManager(this));
+        rvLatin.setAdapter(latinAdapter);
     }
 
     private void getData(){
         showProgressDialog("Please Wait");
-        apiSevice.getKamus().enqueue(new Callback<KamusResponse>() {
+        apiSevice.getLatin().enqueue(new Callback<LatinResponse>() {
             @Override
-            public void onResponse(@NonNull Call<KamusResponse> call, @NonNull Response<KamusResponse> response) {
+            public void onResponse(@NonNull Call<LatinResponse> call, @NonNull Response<LatinResponse> response) {
                 if (response.body().isStatus()){
                     dissmisProgressDialog();
                     kamusList= response.body().getData();
-                    rvIndo.setAdapter(new IndonesiaAdapter(getApplicationContext(), kamusList));
-                    indonesiaAdapter.notifyDataSetChanged();
+                    rvLatin.setAdapter(new LatinAdapter(getApplicationContext(), kamusList));
+                    latinAdapter.notifyDataSetChanged();
                 }else {
                     dissmisProgressDialog();
                     showMessage("Error Response");
@@ -94,7 +94,7 @@ public class IndonesiaActivity extends NormalActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<KamusResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<LatinResponse> call, @NonNull Throwable t) {
                 dissmisProgressDialog();
                 showMessage(t.getMessage());
             }
@@ -103,7 +103,6 @@ public class IndonesiaActivity extends NormalActivity {
 
     private void initSearch(){
         etSearch.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
 
             }
@@ -113,31 +112,27 @@ public class IndonesiaActivity extends NormalActivity {
             }
 
             public void onTextChanged(CharSequence query, int start, int before, int count) {
-
                 query = query.toString().toLowerCase();
-
-                final List<Kamus> filteredList = new ArrayList<>();
-
+                final List<Latin> filteredList = new ArrayList<>();
                 for (int i = 0; i < kamusList.size(); i++) {
-
-                    final String bidang = kamusList.get(i).getNamaKamus().toLowerCase();
+                    final String bidang = kamusList.get(i).getNamaLatin().toLowerCase();
                     if (bidang.contains(query)) {
                         filteredList.add(kamusList.get(i));
                     }
                 }
 
-                rvIndo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                indonesiaAdapter= new IndonesiaAdapter(getApplicationContext(), filteredList);
-                rvIndo.setAdapter(indonesiaAdapter);
-                indonesiaAdapter.notifyDataSetChanged();  // data set changed
+                rvLatin.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                latinAdapter= new LatinAdapter(getApplicationContext(), filteredList);
+                rvLatin.setAdapter(latinAdapter);
+                latinAdapter.notifyDataSetChanged();  // data set changed
             }
         });
     }
 
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "id-ID");
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id-ID");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt));
         try {
             startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
