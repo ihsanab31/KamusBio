@@ -40,8 +40,6 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
         return R.layout.activity_indonesia;
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
