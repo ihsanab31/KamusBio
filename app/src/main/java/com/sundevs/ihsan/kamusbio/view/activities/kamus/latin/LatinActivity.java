@@ -20,6 +20,7 @@ import com.sundevs.ihsan.kamusbio.api.EndPoint;
 import com.sundevs.ihsan.kamusbio.model.Latin;
 import com.sundevs.ihsan.kamusbio.model.response.LatinResponse;
 import com.sundevs.ihsan.kamusbio.utils.NormalActivity;
+import com.sundevs.ihsan.kamusbio.view.base.BaseActivityList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LatinActivity extends NormalActivity {
+public class LatinActivity extends BaseActivityList<LatinPresenter> implements LatinView  {
     EndPoint apiSevice;
     List<Latin> kamusList = new ArrayList<>();
     private final int REQ_CODE_SPEECH_INPUT = 100;
@@ -50,13 +51,8 @@ public class LatinActivity extends NormalActivity {
         super.onCreate(savedInstanceState);
         apiSevice =BaseURL.getAPIService();
         initView();
-        getData();
         initSearch();
-    }
-
-    @Override
-    protected boolean isActionBarEnable() {
-        return false;
+        mPresenter.getLatin(this);
     }
 
     @OnClick({R.id.iv_back, R.id.btn_voice})
@@ -75,30 +71,6 @@ public class LatinActivity extends NormalActivity {
         rvLatin.setHasFixedSize(true);
         rvLatin.setLayoutManager(new LinearLayoutManager(this));
         rvLatin.setAdapter(latinAdapter);
-    }
-
-    private void getData(){
-        showProgressDialog("Please Wait");
-        apiSevice.getLatin().enqueue(new Callback<LatinResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<LatinResponse> call, @NonNull Response<LatinResponse> response) {
-                if (response.body().isStatus()){
-                    dissmisProgressDialog();
-                    kamusList= response.body().getData();
-                    rvLatin.setAdapter(new LatinAdapter(getApplicationContext(), kamusList));
-                    latinAdapter.notifyDataSetChanged();
-                }else {
-                    dissmisProgressDialog();
-                    showMessage("Error Response");
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<LatinResponse> call, @NonNull Throwable t) {
-                dissmisProgressDialog();
-                showMessage(t.getMessage());
-            }
-        });
     }
 
     private void initSearch(){
@@ -158,5 +130,16 @@ public class LatinActivity extends NormalActivity {
             }
 
         }
+    }
+
+    @Override
+    public void onLoad(List<Latin> data) {
+        latinAdapter.refresh(data);
+        kamusList = data;
+    }
+
+    @Override
+    public LatinPresenter initPresenter() {
+        return new LatinPresenter(this);
     }
 }

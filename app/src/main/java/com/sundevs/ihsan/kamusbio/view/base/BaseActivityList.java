@@ -9,7 +9,6 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -57,6 +56,7 @@ public abstract class BaseActivityList<PT extends BasePresnter> extends AppCompa
         setContentView(getActivityView());
         ButterKnife.bind(this);
         onBindView();
+        getSupportActionBar().hide();
         BaseActivityListPermissionsDispatcher.needPermisonWithPermissionCheck(this);
         mPresenter = initPresenter();
     }
@@ -161,24 +161,12 @@ public abstract class BaseActivityList<PT extends BasePresnter> extends AppCompa
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        initActionBar();
         if (mPresenter != null) {
             mPresenter.detach();
         }
     }
 
-    protected abstract boolean isActionBarEnable();
 
-
-
-    private void initActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            if (!isActionBarEnable()) {
-                actionBar.hide();
-            }
-        }
-    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

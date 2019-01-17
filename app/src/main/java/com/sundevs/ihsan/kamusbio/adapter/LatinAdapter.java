@@ -14,9 +14,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.adapter.listener.ItemClickListener;
+import com.sundevs.ihsan.kamusbio.model.Kamus;
 import com.sundevs.ihsan.kamusbio.model.Latin;
 import com.sundevs.ihsan.kamusbio.utils.Constant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -72,6 +74,12 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
 
     }
+    public void refresh(List<Latin> fill) {
+        latinList = new ArrayList<>();
+        latinList.addAll(fill);
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ItemClickListener itemClickListener;
         @BindView(R.id.img_list)

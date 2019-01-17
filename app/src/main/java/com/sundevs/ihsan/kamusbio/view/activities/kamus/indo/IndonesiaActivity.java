@@ -51,11 +51,6 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
         mPresenter.getIndonesia(this);
     }
 
-    @Override
-    protected boolean isActionBarEnable() {
-        return false;
-    }
-
     @OnClick({R.id.iv_back, R.id.btn_voice})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -142,6 +137,7 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
     @Override
     public void onLoad(List<Kamus> data) {
         indonesiaAdapter.refresh(data);
+        kamusList = data;
     }
 
     @Override
