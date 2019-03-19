@@ -55,7 +55,7 @@
         </service>
 
         <activity android:name=".view.activities.kamus.indo.IndonesiaActivity" />
-        <activity android:name=".view.activities.kamus.latin.LatinActivity"></activity>
+        <activity android:name=".view.activities.kamus.latin.LatinActivity"/>
     </application>
 
 </manifest>

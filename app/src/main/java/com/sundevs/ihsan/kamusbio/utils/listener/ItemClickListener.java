@@ -1,4 +1,4 @@
-package com.sundevs.ihsan.kamusbio.adapter.listener;
+package com.sundevs.ihsan.kamusbio.utils.listener;
 
 import android.view.View;
 

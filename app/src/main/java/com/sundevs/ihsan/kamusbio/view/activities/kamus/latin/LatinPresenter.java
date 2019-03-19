@@ -8,8 +8,8 @@ import android.widget.Toast;
 import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
-import com.sundevs.ihsan.kamusbio.model.Latin;
-import com.sundevs.ihsan.kamusbio.model.response.LatinResponse;
+import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.model.response.KamusResponse;
 import com.sundevs.ihsan.kamusbio.view.base.BasePresnter;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import retrofit2.Response;
  * This class for
  */
 class LatinPresenter extends BasePresnter<LatinView> {
-    private List<Latin> kamusList = new ArrayList<>();
+    private List<Kamus> kamusList = new ArrayList<>();
 
     LatinPresenter (LatinView view){
         super.attach(view);
@@ -44,21 +44,21 @@ class LatinPresenter extends BasePresnter<LatinView> {
         dialog.setMessage(activity.getString(R.string.please_wait));
         dialog.show();
         EndPoint apiService = BaseURL.getAPIService();
-        apiService.getLatin().enqueue(new Callback<LatinResponse>() {
+        apiService.getKamus().enqueue(new Callback<KamusResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LatinResponse> call, @NonNull Response<LatinResponse> response) {
+            public void onResponse(@NonNull Call<KamusResponse> call, @NonNull Response<KamusResponse> response) {
                 if (response.body().isStatus()){
                     dialog.dismiss();
                     kamusList= response.body().getData();
                     mView.onLoad(kamusList);
                 }else {
                     dialog.dismiss();
-                    Toast.makeText(activity, "Error Response", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Sorry No Data List", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<LatinResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<KamusResponse> call, @NonNull Throwable t) {
                 dialog.dismiss();
                 Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
             }

@@ -1,6 +1,6 @@
 package com.sundevs.ihsan.kamusbio.view.activities.kamus.latin;
 
-import com.sundevs.ihsan.kamusbio.model.Latin;
+import com.sundevs.ihsan.kamusbio.model.Kamus;
 import com.sundevs.ihsan.kamusbio.view.base.BaseView;
 
 /**
@@ -12,5 +12,5 @@ import com.sundevs.ihsan.kamusbio.view.base.BaseView;
  * ------------------------------
  * This class for
  */
-interface LatinView extends BaseView<Latin> {
+interface LatinView extends BaseView<Kamus> {
 }

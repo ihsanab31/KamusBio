@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -17,9 +16,7 @@ import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.adapter.LatinAdapter;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
-import com.sundevs.ihsan.kamusbio.model.Latin;
-import com.sundevs.ihsan.kamusbio.model.response.LatinResponse;
-import com.sundevs.ihsan.kamusbio.utils.NormalActivity;
+import com.sundevs.ihsan.kamusbio.model.Kamus;
 import com.sundevs.ihsan.kamusbio.view.base.BaseActivityList;
 
 import java.util.ArrayList;
@@ -27,13 +24,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LatinActivity extends BaseActivityList<LatinPresenter> implements LatinView  {
     EndPoint apiSevice;
-    List<Latin> kamusList = new ArrayList<>();
+    List<Kamus> kamusList = new ArrayList<>();
     private final int REQ_CODE_SPEECH_INPUT = 100;
     LatinAdapter latinAdapter;
     @BindView(R.id.et_search)
@@ -85,9 +79,9 @@ public class LatinActivity extends BaseActivityList<LatinPresenter> implements L
 
             public void onTextChanged(CharSequence query, int start, int before, int count) {
                 query = query.toString().toLowerCase();
-                final List<Latin> filteredList = new ArrayList<>();
+                final List<Kamus> filteredList = new ArrayList<>();
                 for (int i = 0; i < kamusList.size(); i++) {
-                    final String bidang = kamusList.get(i).getNamaLatin().toLowerCase();
+                    final String bidang = kamusList.get(i).getLatin().toLowerCase();
                     if (bidang.contains(query)) {
                         filteredList.add(kamusList.get(i));
                     }
@@ -97,6 +91,7 @@ public class LatinActivity extends BaseActivityList<LatinPresenter> implements L
                 latinAdapter= new LatinAdapter(getApplicationContext(), filteredList);
                 rvLatin.setAdapter(latinAdapter);
                 latinAdapter.notifyDataSetChanged();  // data set changed
+                rvLatin.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -133,7 +128,7 @@ public class LatinActivity extends BaseActivityList<LatinPresenter> implements L
     }
 
     @Override
-    public void onLoad(List<Latin> data) {
+    public void onLoad(List<Kamus> data) {
         latinAdapter.refresh(data);
         kamusList = data;
     }

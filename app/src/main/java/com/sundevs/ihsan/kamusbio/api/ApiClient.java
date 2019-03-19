@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * ------------------------------
  * This class for
  */
-class ApiClient {
+class   ApiClient {
     private static Retrofit retrofit = null;
 
     static Retrofit getClient(String baseUrl){
@@ -24,7 +24,7 @@ class ApiClient {
 
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
+                    .baseUrl(com.sundevs.ihsan.kamusbio.utils.Constant.BASE_URL_API)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();

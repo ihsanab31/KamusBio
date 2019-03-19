@@ -3,7 +3,9 @@ package com.sundevs.ihsan.kamusbio.view.activities.kamus.indo;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.speech.RecognizerIntent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -17,6 +19,7 @@ import com.sundevs.ihsan.kamusbio.adapter.IndonesiaAdapter;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
 import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.utils.Constant;
 import com.sundevs.ihsan.kamusbio.view.base.BaseActivityList;
 
 import java.util.ArrayList;
@@ -26,7 +29,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> implements IndonesiaView {
-    EndPoint apiSevice;
     List<Kamus> kamusList = new ArrayList<>();
     @BindView(R.id.et_search)
     CustomEditText etSearch;
@@ -43,7 +45,6 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        apiSevice = BaseURL.getAPIService();
         initView();
         initSearch();
         mPresenter.getIndonesia(this);
@@ -73,11 +74,9 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
         etSearch.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
             }
-
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             public void onTextChanged(CharSequence query, int start, int before, int count) {
 
                 query = query.toString().toLowerCase();
@@ -96,6 +95,7 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
                 indonesiaAdapter = new IndonesiaAdapter(getApplicationContext(), filteredList);
                 rvIndo.setAdapter(indonesiaAdapter);
                 indonesiaAdapter.notifyDataSetChanged();  // data set changed
+                rvIndo.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -141,5 +141,22 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
     @Override
     public IndonesiaPresenter initPresenter() {
         return new IndonesiaPresenter(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Constant.mBundleRecyclerViewState = new Bundle();
+        Parcelable liststate = rvIndo.getLayoutManager().onSaveInstanceState();
+        Constant.mBundleRecyclerViewState.putParcelable(Constant.KEY_RECYCLER_STATE, liststate);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Constant.mBundleRecyclerViewState !=null) {
+            Parcelable liststate = Constant.mBundleRecyclerViewState.getParcelable(Constant.KEY_RECYCLER_STATE);
+            rvIndo.getLayoutManager().onRestoreInstanceState(liststate);
+        }
     }
 }

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sundevs.ihsan.kamusbio.R;
-import com.sundevs.ihsan.kamusbio.adapter.listener.ItemClickListener;
+import com.sundevs.ihsan.kamusbio.utils.listener.ItemClickListener;
 import com.sundevs.ihsan.kamusbio.model.Kamus;
 import com.sundevs.ihsan.kamusbio.utils.Constant;
 
@@ -99,7 +99,7 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
         }
 
         void bindTo(Kamus kamus) {
-            txtKegiatan.setText("Hewan\t\t\t\t : "+kamus.getNamaKamus());
+            txtKegiatan.setText("Tumbuhan\t\t: "+kamus.getNamaKamus());
             textTempat.setText("Bahasa Latin : " + kamus.getLatin());
             txtTanggal.setText("Deskripsi\t\t\t :  " + kamus.getDeskripsi());
             Glide.with(context)
@@ -112,5 +112,10 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
         public void onClick(View v) {
             itemClickListener.onClick(v);
         }
+    }
+
+    public void addLaporan(List<Kamus> laporanList){
+        kamusList.addAll(laporanList);
+        notifyDataSetChanged();
     }
 }

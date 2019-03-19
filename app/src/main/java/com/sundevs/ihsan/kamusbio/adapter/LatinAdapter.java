@@ -13,9 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sundevs.ihsan.kamusbio.R;
-import com.sundevs.ihsan.kamusbio.adapter.listener.ItemClickListener;
+import com.sundevs.ihsan.kamusbio.utils.listener.ItemClickListener;
 import com.sundevs.ihsan.kamusbio.model.Kamus;
-import com.sundevs.ihsan.kamusbio.model.Latin;
 import com.sundevs.ihsan.kamusbio.utils.Constant;
 
 import java.util.ArrayList;
@@ -37,9 +36,9 @@ import butterknife.ButterKnife;
 @SuppressLint({"InflateParams","SetTextI18n", "ResourceAsColor","SetTextI18n"})
 public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> {
     private Context context;
-    private List<Latin> latinList;
+    private List<Kamus> latinList;
 
-    public LatinAdapter(Context context, List<Latin> latinList) {
+    public LatinAdapter(Context context, List<Kamus> latinList) {
         this.context = context;
         this.latinList = latinList;
     }
@@ -63,7 +62,7 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final LatinAdapter.ViewHolder holder, int position) {
-        final Latin latin = latinList.get(position);
+        final Kamus latin = latinList.get(position);
         holder.bindTo(latin);
         holder.setClickListener(new ItemClickListener() {
             @Override
@@ -74,7 +73,7 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
 
     }
-    public void refresh(List<Latin> fill) {
+    public void refresh(List<Kamus> fill) {
         latinList = new ArrayList<>();
         latinList.addAll(fill);
         notifyDataSetChanged();
@@ -104,10 +103,10 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
             this.itemClickListener = itemClickListener;
         }
 
-        void bindTo(Latin latin) {
-            textTempat.setText("Hewan\t\t\t\t : "+latin.getNamaIndo());
-            txtKegiatan.setText("Bahasa Latin : " + latin.getNamaLatin());
-            txtTanggal.setText("Deskripsi\t\t\t :  " + latin.getDeskripsiLatin());
+        void bindTo(Kamus latin) {
+            txtKegiatan.setText("Tumbuhan\t\t: "+latin.getNamaKamus());
+            textTempat.setText("Bahasa Latin : " + latin.getLatin());
+            txtTanggal.setText("Deskripsi\t\t\t :  " + latin.getDeskripsi());
             Glide.with(context)
                     .load(Constant.IMAGE_URL+latin.getFoto())
                     .placeholder(R.drawable.ic_null)
