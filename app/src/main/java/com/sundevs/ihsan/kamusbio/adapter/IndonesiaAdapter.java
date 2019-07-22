@@ -100,8 +100,8 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
 
         void bindTo(Kamus kamus) {
             txtKegiatan.setText("Tumbuhan\t\t: "+kamus.getNamaKamus());
-            textTempat.setText("Bahasa Latin : " + kamus.getLatin());
-            txtTanggal.setText("Deskripsi\t\t\t :  " + kamus.getDeskripsi());
+            textTempat.setText("Bahasa Latin\t: " + kamus.getLatin());
+            txtTanggal.setText("Deskripsi\t\t\t:  " + kamus.getDeskripsi());
             Glide.with(context)
                     .load(Constant.IMAGE_URL+kamus.getFoto())
                     .placeholder(R.drawable.ic_null)

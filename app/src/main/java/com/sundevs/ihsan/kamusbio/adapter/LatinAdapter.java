@@ -105,8 +105,8 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
         void bindTo(Kamus latin) {
             txtKegiatan.setText("Tumbuhan\t\t: "+latin.getNamaKamus());
-            textTempat.setText("Bahasa Latin : " + latin.getLatin());
-            txtTanggal.setText("Deskripsi\t\t\t :  " + latin.getDeskripsi());
+            textTempat.setText("Bahasa Latin\t: " + latin.getLatin());
+            txtTanggal.setText("Deskripsi\t\t\t:  " + latin.getDeskripsi());
             Glide.with(context)
                     .load(Constant.IMAGE_URL+latin.getFoto())
                     .placeholder(R.drawable.ic_null)

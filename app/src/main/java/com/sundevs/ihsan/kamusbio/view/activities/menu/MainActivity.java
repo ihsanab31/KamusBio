@@ -54,7 +54,7 @@ public class MainActivity extends NormalActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Apakah anda yakin keluar dari aplikasi ini?")
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 finish();
                                 MainActivity.this.onBackPressed();

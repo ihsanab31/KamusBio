@@ -33,14 +33,16 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <activity android:name=".view.activities.menu.MainActivity" />
-        <activity android:name=".view.activities.user.UserNameActivity" />
-        <activity android:name=".view.activities.SplashScreenActivity">
+        <activity android:name=".view.activities.menu.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".view.activities.user.UserNameActivity" />
+        <activity android:name=".view.activities.SplashScreenActivity">
+
         </activity>
 
         <service android:name=".utils.service.MyFirebaseMessagingService">
