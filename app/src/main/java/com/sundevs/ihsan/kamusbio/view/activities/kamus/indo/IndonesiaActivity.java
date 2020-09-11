@@ -18,7 +18,7 @@ import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.adapter.IndonesiaAdapter;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
-import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.model.KamusItem;
 import com.sundevs.ihsan.kamusbio.utils.Constant;
 import com.sundevs.ihsan.kamusbio.view.base.BaseActivityList;
 
@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> implements IndonesiaView {
-    List<Kamus> kamusList = new ArrayList<>();
+    List<KamusItem> kamusList = new ArrayList<>();
     @BindView(R.id.et_search)
     CustomEditText etSearch;
     @BindView(R.id.rv_indo)
@@ -81,7 +81,7 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
 
                 query = query.toString().toLowerCase();
 
-                final List<Kamus> filteredList = new ArrayList<>();
+                final List<KamusItem> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < kamusList.size(); i++) {
 
@@ -133,7 +133,7 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
     }
 
     @Override
-    public void onLoad(List<Kamus> data) {
+    public void onLoad(List<KamusItem> data) {
         indonesiaAdapter.refresh(data);
         kamusList = data;
     }

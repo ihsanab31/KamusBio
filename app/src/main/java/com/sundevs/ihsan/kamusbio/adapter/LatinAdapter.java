@@ -14,8 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.utils.listener.ItemClickListener;
-import com.sundevs.ihsan.kamusbio.model.Kamus;
-import com.sundevs.ihsan.kamusbio.utils.Constant;
+import com.sundevs.ihsan.kamusbio.model.KamusItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +35,9 @@ import butterknife.ButterKnife;
 @SuppressLint({"InflateParams","SetTextI18n", "ResourceAsColor","SetTextI18n"})
 public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> {
     private Context context;
-    private List<Kamus> latinList;
+    private List<KamusItem> latinList;
 
-    public LatinAdapter(Context context, List<Kamus> latinList) {
+    public LatinAdapter(Context context, List<KamusItem> latinList) {
         this.context = context;
         this.latinList = latinList;
     }
@@ -62,7 +61,7 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final LatinAdapter.ViewHolder holder, int position) {
-        final Kamus latin = latinList.get(position);
+        final KamusItem latin = latinList.get(position);
         holder.bindTo(latin);
         holder.setClickListener(new ItemClickListener() {
             @Override
@@ -73,7 +72,7 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
 
 
     }
-    public void refresh(List<Kamus> fill) {
+    public void refresh(List<KamusItem> fill) {
         latinList = new ArrayList<>();
         latinList.addAll(fill);
         notifyDataSetChanged();
@@ -103,12 +102,12 @@ public class LatinAdapter extends RecyclerView.Adapter<LatinAdapter.ViewHolder> 
             this.itemClickListener = itemClickListener;
         }
 
-        void bindTo(Kamus latin) {
+        void bindTo(KamusItem latin) {
             txtKegiatan.setText("Tumbuhan\t\t: "+latin.getNamaKamus());
             textTempat.setText("Bahasa Latin\t: " + latin.getLatin());
             txtTanggal.setText("Deskripsi\t\t\t:  " + latin.getDeskripsi());
             Glide.with(context)
-                    .load(Constant.IMAGE_URL+latin.getFoto())
+                    .load(latin.getFoto())
                     .placeholder(R.drawable.ic_null)
                     .into(imgList);
         }

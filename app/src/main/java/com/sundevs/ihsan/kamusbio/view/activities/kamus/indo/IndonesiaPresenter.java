@@ -9,7 +9,9 @@ import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
 import com.sundevs.ihsan.kamusbio.model.Kamus;
-import com.sundevs.ihsan.kamusbio.model.response.KamusResponse;
+import com.sundevs.ihsan.kamusbio.model.KamusItem;
+import com.sundevs.ihsan.kamusbio.model.response.KamuBioResponse;
+import com.sundevs.ihsan.kamusbio.utils.Constant;
 import com.sundevs.ihsan.kamusbio.view.base.BasePresnter;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import retrofit2.Response;
  * This class for
  */
 public class IndonesiaPresenter extends BasePresnter<IndonesiaView> {
-    private List<Kamus> kamusList = new ArrayList<>();
+    private List<KamusItem> kamusList = new ArrayList<>();
     IndonesiaPresenter(IndonesiaView view){
         super.attach(view);
     }
@@ -43,12 +45,12 @@ public class IndonesiaPresenter extends BasePresnter<IndonesiaView> {
         dialog.setMessage(activity.getString(R.string.please_wait));
         dialog.show();
         EndPoint apiService = BaseURL.getAPIService();
-        apiService.getKamus().enqueue(new Callback<KamusResponse>() {
+        apiService.getKamus(Constant.token).enqueue(new Callback<KamuBioResponse>() {
             @Override
-            public void onResponse(@NonNull Call<KamusResponse> call, @NonNull Response<KamusResponse> response) {
-                if (response.body().isStatus()) {
+            public void onResponse(@NonNull Call<KamuBioResponse> call, @NonNull Response<KamuBioResponse> response) {
+                if (response.body().getStatus().equals("success")) {
                     dialog.dismiss();
-                    kamusList = response.body().getData();
+                    kamusList = response.body().getCity();
                     mView.onLoad(kamusList);
                 } else {
                     dialog.dismiss();
@@ -57,7 +59,7 @@ public class IndonesiaPresenter extends BasePresnter<IndonesiaView> {
             }
 
             @Override
-            public void onFailure(@NonNull Call<KamusResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<KamuBioResponse> call, @NonNull Throwable t) {
                 dialog.dismiss();
                 Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
             }

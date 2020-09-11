@@ -1,7 +1,5 @@
 package com.sundevs.ihsan.kamusbio.api;
 
-import com.sundevs.ihsan.kamusbio.utils.Constant;
-
 /**
  * Created by
  * Name     : Ihsan Abdurahman
@@ -14,6 +12,6 @@ import com.sundevs.ihsan.kamusbio.utils.Constant;
 public class BaseURL {
 
     public static EndPoint getAPIService() {
-        return ApiClient.getClient(Constant.BASE_URL_API).create(EndPoint.class);
+        return ApiClient.getClient().create(EndPoint.class);
     }
 }

@@ -16,7 +16,7 @@ import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.adapter.LatinAdapter;
 import com.sundevs.ihsan.kamusbio.api.BaseURL;
 import com.sundevs.ihsan.kamusbio.api.EndPoint;
-import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.model.KamusItem;
 import com.sundevs.ihsan.kamusbio.view.base.BaseActivityList;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import butterknife.OnClick;
 
 public class LatinActivity extends BaseActivityList<LatinPresenter> implements LatinView  {
     EndPoint apiSevice;
-    List<Kamus> kamusList = new ArrayList<>();
+    List<KamusItem> kamusList = new ArrayList<>();
     private final int REQ_CODE_SPEECH_INPUT = 100;
     LatinAdapter latinAdapter;
     @BindView(R.id.et_search)
@@ -79,7 +79,7 @@ public class LatinActivity extends BaseActivityList<LatinPresenter> implements L
 
             public void onTextChanged(CharSequence query, int start, int before, int count) {
                 query = query.toString().toLowerCase();
-                final List<Kamus> filteredList = new ArrayList<>();
+                final List<KamusItem> filteredList = new ArrayList<>();
                 for (int i = 0; i < kamusList.size(); i++) {
                     final String bidang = kamusList.get(i).getLatin().toLowerCase();
                     if (bidang.contains(query)) {
@@ -128,7 +128,7 @@ public class LatinActivity extends BaseActivityList<LatinPresenter> implements L
     }
 
     @Override
-    public void onLoad(List<Kamus> data) {
+    public void onLoad(List<KamusItem> data) {
         latinAdapter.refresh(data);
         kamusList = data;
     }

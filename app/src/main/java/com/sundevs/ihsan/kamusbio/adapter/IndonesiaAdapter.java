@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.sundevs.ihsan.kamusbio.R;
 import com.sundevs.ihsan.kamusbio.utils.listener.ItemClickListener;
-import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.model.KamusItem;
 import com.sundevs.ihsan.kamusbio.utils.Constant;
 
 import java.util.ArrayList;
@@ -35,9 +35,9 @@ import butterknife.ButterKnife;
 @SuppressLint({"InflateParams","SetTextI18n", "ResourceAsColor","SetTextI18n"})
 public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.ViewHolder> {
     private Context context;
-    private List<Kamus> kamusList;
+    private List<KamusItem> kamusList;
 
-    public IndonesiaAdapter(Context context, List<Kamus> kamusList) {
+    public IndonesiaAdapter(Context context, List<KamusItem> kamusList) {
         this.context = context;
         this.kamusList = kamusList;
     }
@@ -58,7 +58,7 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        final Kamus kamus = kamusList.get(position);
+        final KamusItem kamus = kamusList.get(position);
         holder.bindTo(kamus);
         holder.setClickListener(new ItemClickListener() {
             @Override
@@ -69,7 +69,7 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
 
     }
 
-    public void refresh(List<Kamus> fill) {
+    public void refresh(List<KamusItem> fill) {
         kamusList = new ArrayList<>();
         kamusList.addAll(fill);
         notifyDataSetChanged();
@@ -98,12 +98,12 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
             this.itemClickListener = itemClickListener;
         }
 
-        void bindTo(Kamus kamus) {
+        void bindTo(KamusItem kamus) {
             txtKegiatan.setText("Tumbuhan\t\t: "+kamus.getNamaKamus());
             textTempat.setText("Bahasa Latin\t: " + kamus.getLatin());
             txtTanggal.setText("Deskripsi\t\t\t:  " + kamus.getDeskripsi());
             Glide.with(context)
-                    .load(Constant.IMAGE_URL+kamus.getFoto())
+                    .load(kamus.getFoto())
                     .placeholder(R.drawable.ic_null)
                     .into(imgList);
         }
@@ -114,7 +114,7 @@ public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.Vie
         }
     }
 
-    public void addLaporan(List<Kamus> laporanList){
+    public void addLaporan(List<KamusItem> laporanList){
         kamusList.addAll(laporanList);
         notifyDataSetChanged();
     }

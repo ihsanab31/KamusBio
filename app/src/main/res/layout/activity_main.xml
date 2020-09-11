@@ -35,6 +35,7 @@
             android:textColor="@color/white"
             android:text="@string/kamus_biologi_latin" />
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_exit"
             android:layout_marginTop="@dimen/dimen6"
             android:layout_width="@dimen/dimen250dp"

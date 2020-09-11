@@ -1,6 +1,7 @@
 package com.sundevs.ihsan.kamusbio.view.activities.kamus.indo;
 
 import com.sundevs.ihsan.kamusbio.model.Kamus;
+import com.sundevs.ihsan.kamusbio.model.KamusItem;
 import com.sundevs.ihsan.kamusbio.view.base.BaseView;
 
 /**
@@ -12,5 +13,5 @@ import com.sundevs.ihsan.kamusbio.view.base.BaseView;
  * ------------------------------
  * This class for
  */
-interface IndonesiaView extends BaseView<Kamus> {
+interface IndonesiaView extends BaseView<KamusItem> {
 }
