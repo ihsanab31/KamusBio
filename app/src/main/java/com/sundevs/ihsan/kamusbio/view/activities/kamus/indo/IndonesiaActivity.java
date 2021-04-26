@@ -78,19 +78,21 @@ public class IndonesiaActivity extends BaseActivityList<IndonesiaPresenter> impl
 
             }
             public void onTextChanged(CharSequence query, int start, int before, int count) {
-
+                // get data yang akan dicari
                 query = query.toString().toLowerCase();
-
+                //list data kamus
                 final List<KamusItem> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < kamusList.size(); i++) {
-
+                    //proses pencocokan data
                     final String bidang = kamusList.get(i).getNamaKamus().toLowerCase();
+                    //proses pencocokan perhuruf
                     if (bidang.contains(query)) {
+                        // jika ada yang cocok maka di masukkan kesalam list
                         filteredList.add(kamusList.get(i));
                     }
                 }
-
+                // proses menampikan data
                 rvIndo.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 indonesiaAdapter = new IndonesiaAdapter(getApplicationContext(), filteredList);
                 rvIndo.setAdapter(indonesiaAdapter);
