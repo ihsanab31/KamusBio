@@ -78,15 +78,20 @@ public class LatinActivity extends BaseActivityList<LatinPresenter> implements L
             }
 
             public void onTextChanged(CharSequence query, int start, int before, int count) {
+                // get data yang akan dicari
                 query = query.toString().toLowerCase();
+                 //list data kamus
                 final List<KamusItem> filteredList = new ArrayList<>();
                 for (int i = 0; i < kamusList.size(); i++) {
+                    //proses pencocokan data
                     final String bidang = kamusList.get(i).getLatin().toLowerCase();
+                     //proses pencocokan perhuruf
                     if (bidang.contains(query)) {
+                        // jika ada yang cocok maka di masukkan kesalam list
                         filteredList.add(kamusList.get(i));
                     }
                 }
-
+                 // proses menampikan data
                 rvLatin.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 latinAdapter= new LatinAdapter(getApplicationContext(), filteredList);
                 rvLatin.setAdapter(latinAdapter);
