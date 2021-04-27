@@ -22,15 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by
- * Name     : Ihsan Abdurahman
- * Email    : ihsanab31@gmail.com
- * WA       : 085749729115
- * on       : 04, January, 2019
- * ------------------------------
- * This class for
- */
+
 @SuppressLint({"InflateParams","SetTextI18n", "ResourceAsColor","SetTextI18n"})
 public class IndonesiaAdapter extends  RecyclerView.Adapter<IndonesiaAdapter.ViewHolder> {
     private Context context;

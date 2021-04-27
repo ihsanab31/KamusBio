@@ -11,15 +11,7 @@ import com.skripsi.dija.kamusbio.view.activities.user.UserNameActivity;
 
 import java.util.HashMap;
 
-/**
- * Created by
- * Name     : Ihsan Abdurahman
- * Email    : ihsanab31@gmail.com
- * WA       : 085749729115
- * on       : 28, October, 2018
- * ------------------------------
- * This class for session login
- */
+
 public class SessionManager {
     private SharedPreferences pref;
     private Editor editor;

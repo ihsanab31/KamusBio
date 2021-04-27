@@ -11,15 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
-/**
- * Created by
- * Name     : Ihsan Abdurahman
- * Email    : ihsanab31@gmail.com
- * WA       : 085749729115
- * on       : 23, October, 2018
- * ------------------------------
- * This class for  api response
- */
+
 public interface EndPoint {
 
     @GET("listTumbuhan")

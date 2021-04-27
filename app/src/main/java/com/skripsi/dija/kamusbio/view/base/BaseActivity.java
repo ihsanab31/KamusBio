@@ -29,15 +29,7 @@ import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
-/**
- * Created by
- * Name     : Ihsan Abdurahman
- * Email    : ihsanab31@gmail.com
- * WA       : 0878253827096
- * on Sunday, 19-11-2017
- * ------------------------------
- * This class for view activity
- */
+
 
 @RuntimePermissions
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {

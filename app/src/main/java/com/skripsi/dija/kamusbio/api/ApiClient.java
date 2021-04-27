@@ -5,15 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by
- * Name     : Ihsan Abdurahman
- * Email    : ihsanab31@gmail.com
- * WA       : 085749729115
- * on       : 23, October, 2018
- * ------------------------------
- * This class for
- */
+
 class   ApiClient {
     private static Retrofit retrofit = null;
 

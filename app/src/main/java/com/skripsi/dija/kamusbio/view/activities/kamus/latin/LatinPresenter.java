@@ -20,15 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by
- * Name     : Ihsan Abdurahman
- * Email    : ihsanab31@gmail.com
- * WA       : 0878253827096
- * Tanggal  : 17/01/2019
- * ------------------------------
- * This class for
- */
+
 class LatinPresenter extends BasePresnter<LatinView> {
     private List<KamusItem> kamusList = new ArrayList<>();
 
